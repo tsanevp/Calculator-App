@@ -36,22 +36,31 @@ app.get("/", function(req, res) {
 
 app.post("/", function(req, res) {
     let buttonClicked = req.body.buttonClicked;
-    console.log("button clicked: " + buttonClicked);
-    console.log("n1: " + num1);
-    console.log("n2: " + num2);
-    console.log("op clicked: " + operatorClicked);
-
+    console.log("res: " + result);
 
     if (operators.includes(buttonClicked)) {
-        console.log(buttonClicked);
+        if (result !== 0) {
+            console.log("reset1: " + result);
+
+            num1 = result;
+            num2 = "";
+        }
+
         operatorClicked = true;
         operator = buttonClicked;
     }
 
     if (numbers.includes(buttonClicked)) {
         let num = buttonClicked;
+        if (result !== 0 && num2 !== "") {
+            console.log("reset2: " + result);
+            resetState();
+        }
+        console.log("inside");
         if (operatorClicked) {
             num2 += num;
+            console.log("num2: " + num2);
+
         } else {
             num1 += num;
         }
@@ -65,22 +74,26 @@ app.post("/", function(req, res) {
             num1 += decimal;
         }
     } 
-
+    console.log("num111: " + num1);
+    console.log("num222: " + num2);
     if (buttonClicked === equals) {
-        console.log(num1);
-        console.log(num2);
         result = calculateAnswer[operator](Number(num1), Number(num2));
-        // resetState();
     }
 
     if (buttonClicked === clear) {
+        console.log("reset3: " + result);
         resetState();
     }
-    res.json({ result });
-});
 
-app.listen('3000', function() {
-    console.log("server is running on port 3000");
+    // if (num2 === "") {
+    //     result = num1;
+    // }
+
+    // if (num1 !== "" && operatorClicked) {
+    //     result = num2;
+    // }
+
+    res.json({ result });
 });
 
 function resetState () {
@@ -89,3 +102,7 @@ function resetState () {
     operatorClicked = false;
     result = 0;
 }
+
+app.listen('3000', function() {
+    console.log("server is running on port 3000");
+});
