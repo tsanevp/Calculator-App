@@ -5,7 +5,6 @@
 - [Overview](https://github.com/tsanevp/Calculator-App#overview)
     - [The challenge](https://github.com/tsanevp/Calculator-App#the-challenge)
     - [Screenshot](https://github.com/tsanevp/Calculator-App#screenshot)
-    - [Links](https://github.com/tsanevp/Calculator-App#links)
 - [My process](https://github.com/tsanevp/Calculator-App#my-process)
     - [Built with](https://github.com/tsanevp/Calculator-App#built-with)
     - [What I learned](https://github.com/tsanevp/Calculator-App#what-i-learned)
@@ -18,19 +17,15 @@
 
 ### The challenge
 
-- Creating a mini-game utilizing JS and JQuery with little prior experience with either:
-    - It was a great learning opportunity to challenge myself to make a small game using JQuery. Now, I have a much deeper understanding of how to traverse and manipulate my HTML documents effectively
-- Scanning the JQuery documentation
+- Creating my first Express.js/Node.js project:
+    - It was a great learning opportunity to challenge myself in making a basic calculator using Express.js & Node.js. To better understand how to work in Express, all the calculation logic was handled on the back-end.
+- Working with GET/POST requests
 - Keeping my code readable and easy to understand
     
 ### Screenshot
 
 #### Starting Screen
-<img width="1920" alt="starting state of caclulator" src="https://github.com/tsanevp/Calculator-App/blob/main/public/images/calculator-starting-page.png">
-
-### Links
-
-Live Site URL: [tsanevp.github.io](https://tsanevp.github.io/Simon-Game-Project/)
+<img width="1920" alt="starting state of calculator" src="https://github.com/tsanevp/Calculator-App/blob/main/public/images/calculator-starting-page.png">
 
 ## My process
 
@@ -41,22 +36,21 @@ Live Site URL: [tsanevp.github.io](https://tsanevp.github.io/Simon-Game-Project/
 - JS
 #### Backend
 - Node.js
-- Express
+- Express.js
 
 ### What I learned
 
-- How to use JQuery to implement JS in my simple game
-- How to apply async and await keywords to enable asynchronous, promise-based behavior in my code
+- How to use Express.js to host a server locally
+- How to communicate and send data between my front & back-end code
 
 ### Continued development
 
-- [ ]  Add high-score tracker
-- [ ]  Add a score leaderboard so you can compete with your friends
-- [ ]  Improve the UX design of the game to look better. Very minimal at the moment
+- [ ]  Improve UX and front-end design of the calculator page
+- [ ]  Add additional buttons and features to the calculator
 
 ### Useful resources
 
-- [JQuery documentation](https://api.jquery.com/) - Was constantly referring to documentation
+- [Express documentation](https://expressjs.com/en/4x/api.html) - Was constantly referring to documentation
 
 ## Author
 
