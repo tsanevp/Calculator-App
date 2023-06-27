@@ -36,12 +36,9 @@ app.get("/", function(req, res) {
 
 app.post("/", function(req, res) {
     let buttonClicked = req.body.buttonClicked;
-    console.log("res: " + result);
 
     if (operators.includes(buttonClicked)) {
         if (result !== 0) {
-            console.log("reset1: " + result);
-
             num1 = result;
             num2 = "";
         }
@@ -52,15 +49,12 @@ app.post("/", function(req, res) {
 
     if (numbers.includes(buttonClicked)) {
         let num = buttonClicked;
-        if (result !== 0 && num2 !== "") {
-            console.log("reset2: " + result);
+        if (result !== 0 && num2 !== "" && !operatorClicked) {
             resetState();
         }
-        console.log("inside");
+
         if (operatorClicked) {
             num2 += num;
-            console.log("num2: " + num2);
-
         } else {
             num1 += num;
         }
@@ -74,24 +68,23 @@ app.post("/", function(req, res) {
             num1 += decimal;
         }
     } 
-    console.log("num111: " + num1);
-    console.log("num222: " + num2);
+
     if (buttonClicked === equals) {
         result = calculateAnswer[operator](Number(num1), Number(num2));
+        operatorClicked = false;
+    }
+
+    if (num2 === "") {
+        result = num1;
+    }
+
+    if (num1 !== "" && num2 !== "" && operatorClicked) {
+        result = num2;
     }
 
     if (buttonClicked === clear) {
-        console.log("reset3: " + result);
         resetState();
     }
-
-    // if (num2 === "") {
-    //     result = num1;
-    // }
-
-    // if (num1 !== "" && operatorClicked) {
-    //     result = num2;
-    // }
 
     res.json({ result });
 });
