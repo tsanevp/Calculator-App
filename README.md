@@ -26,7 +26,7 @@
 ### Screenshot
 
 #### Starting Screen
-<img width="1920" alt="personal-website1" src="https://github.com/tsanevp/Simon-Game-Project/blob/main/assets/images/simon-game-screenshot.png">
+<img width="1920" alt="starting state of caclulator" src="https://github.com/tsanevp/Calculator-App/public/images/calculator-starting-page.png">
 
 ### Links
 
