@@ -8,24 +8,6 @@
     <link rel="icon" type="image/x-icon" href="images/calculator-favicon.png">
     <link type="text/css" href="css/style.css" rel="stylesheet">
 
-    <script>
-        function loadDoc() {
-            console.log("hello");
-            document.querySelector("calculator-title").innerHTML = "fsdf";
-
-            var req = new XMLHttpRequest();
-
-            req.open("GET", "/", true);
-
-            req.onreadystatechange = function() {
-
-                if (this.readyState === 4 && this.status === 200) {
-                }
-            };
-
-            req.send();
-        }
-    </script>
 </head>
 
 <body>
@@ -39,32 +21,47 @@
         <input type="text" class="calculator-screen z-depth-1" value="" disabled />
 
         <div class="calculator-keys">
-            <button type="submit" name="operator" class="operator btn btn-info" value="+">+</button>
-            <button type="submit" name="operator" class="operator btn btn-info" value="-">-</button>
-            <button type="submit" name="operator" class="operator btn btn-info" value="*">&times;</button>
-            <button type="submit" name="operator" class="operator btn btn-info" value="/">&divide;</button>
+            <button type="button" value="+" class="operator btn btn-info" onclick="handleButtonClick('+')">+</button>
+            <button type="button" value="-" class="operator btn btn-info" onclick="handleButtonClick('-')">-</button>
+            <button type="button" value="*" class="operator btn btn-info" onclick="handleButtonClick('*')">&times;</button>
+            <button type="button" value="/" class="operator btn btn-info" onclick="handleButtonClick('/')">&divide;</button>
 
-            <button type="submit" name="number" value="7" class="btn btn-light waves-effect">7</button>
-            <button type="submit" name="number" value="8" class="btn btn-light waves-effect">8</button>
-            <button type="submit" name="number" value="9" class="btn btn-light waves-effect">9</button>
+            <button type="button" value="7" class="btn btn-light waves-effect" onclick="handleButtonClick('7')">7</button>
+            <button type="button" value="8" class="btn btn-light waves-effect" onclick="handleButtonClick('8')">8</button>
+            <button type="button" value="9" class="btn btn-light waves-effect" onclick="handleButtonClick('9')">9</button>
 
-            <button type="submit" name="number" value="4" class="btn btn-light waves-effect">4</button>
-            <button type="submit" name="number" value="5" class="btn btn-light waves-effect">5</button>
-            <button type="submit" name="number" value="6" class="btn btn-light waves-effect">6</button>
+            <button type="button" value="4" class="btn btn-light waves-effect" onclick="handleButtonClick('4')">4</button>
+            <button type="button" value="5" class="btn btn-light waves-effect" onclick="handleButtonClick('5')">5</button>
+            <button type="button" value="6" class="btn btn-light waves-effect" onclick="handleButtonClick('6')">6</button>
 
-            <button type="submit" name="number" value="1" class="btn btn-light waves-effect">1</button>
-            <button type="submit" name="number" value="2" class="btn btn-light waves-effect">2</button>
-            <button type="submit" name="number" value="3" class="btn btn-light waves-effect">3</button>
+            <button type="button" value="1" class="btn btn-light waves-effect" onclick="handleButtonClick('1')">1</button>
+            <button type="button" value="2" class="btn btn-light waves-effect" onclick="handleButtonClick('2')">2</button>
+            <button type="button" value="3" class="btn btn-light waves-effect" onclick="handleButtonClick('3')">3</button>
 
-            <button type="submit" name="number" value="0" class="btn btn-light waves-effect">0</button>
-            <button type="submit" name="decimal" class="decimal function btn btn-secondary" value=".">.</button>
-            <button type="submit" name="ac" class="all-clear function btn btn-danger btn-sm" value="all-clear">AC</button>
+            <button type="button" value="0" class="btn btn-light waves-effect" onclick="handleButtonClick('0')">0</button>
+            <button type="button" value="." class="decimal function btn btn-secondary" onclick="handleButtonClick('.')">.</button>
+            <button type="button" value="all-clear" class="all-clear function btn btn-danger btn-sm" onclick="handleButtonClick('ac')">AC</button>
 
-            <button type="submit" name="equals" class="equal-sign operator btn btn-default" value="=" onclick="loadDoc()">=</button>
+            <button type="button" name="equals" class="equal-sign operator btn btn-default" value="=" onclick="handleButtonClick('=')">=</button>
         </div>
     </form>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        async function handleButtonClick(buttonClicked) {
+
+            const response = await fetch('/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ buttonClicked }),
+            });
+
+            const data = await response.json();
+            const result = data.result;
+            document.querySelector('.calculator-screen').value = result;
+        }
+    </script>
 </body>
 
 </html>

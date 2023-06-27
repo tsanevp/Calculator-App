@@ -6,7 +6,13 @@ import bodyParser from 'body-parser';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 
-let currentResult = 0;
+const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+const operators = ['+', '-', '/', '*'];
+const decimal = '.';
+const clear = 'ac';
+const equals = '=';
+
+let result = 0;
 let num1 = "";
 let num2 = "";
 let operator = '+';
@@ -20,31 +26,39 @@ var calculateAnswer = {
 };
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.json());
 app.use(express.static("public"));
 
 app.get("/", function(req, res) {
     res.sendFile(__dirname + "/index.html");
+    resetState();
 });
 
 app.post("/", function(req, res) {
-    let body = req.body;
-    if (body.operator) {
+    let buttonClicked = req.body.buttonClicked;
+    console.log("button clicked: " + buttonClicked);
+    console.log("n1: " + num1);
+    console.log("n2: " + num2);
+    console.log("op clicked: " + operatorClicked);
+
+
+    if (operators.includes(buttonClicked)) {
+        console.log(buttonClicked);
         operatorClicked = true;
-        operator = body.operator;
+        operator = buttonClicked;
     }
 
-    if (body.number) {
-        let num = body.number;
+    if (numbers.includes(buttonClicked)) {
+        let num = buttonClicked;
         if (operatorClicked) {
             num2 += num;
         } else {
             num1 += num;
         }
-        console.log("num1: " + num1 + " num2: " + num2);
     }
 
-    if (body.decimal) {
-        let decimal = body.decimal;
+    if (buttonClicked === decimal) {
+        let decimal = buttonClicked;
         if (operatorClicked) {
             num2 += decimal;
         } else {
@@ -52,11 +66,17 @@ app.post("/", function(req, res) {
         }
     } 
 
-    if (body.equals) {
-        currentResult = calculateAnswer[operator](Number(num1), Number(num2)); 
+    if (buttonClicked === equals) {
+        console.log(num1);
+        console.log(num2);
+        result = calculateAnswer[operator](Number(num1), Number(num2));
+        // resetState();
+    }
+
+    if (buttonClicked === clear) {
         resetState();
     }
-    console.log(body);
+    res.json({ result });
 });
 
 app.listen('3000', function() {
@@ -67,4 +87,5 @@ function resetState () {
     num1 = "";
     num2 = "";
     operatorClicked = false;
+    result = 0;
 }
